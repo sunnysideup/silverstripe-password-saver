@@ -1,0 +1,38 @@
+{
+  "name": "sunnysideup/password-saver",
+  "type": "silverstripe-vendormodule",
+  "description": "Silverstripe module that encrypts passwords server side.",
+  "keywords": [
+    "Silverstripe-CMS",
+    "CMS",
+    "Silverstripe",
+    "password",
+    "encrypt",
+    "security",
+    "client-side",
+    "form",
+    "form fields",
+    "password field",
+    "field"
+  ],
+  "require": {
+    "silverstripe/framework": "^4.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Nicolaas Francken",
+      "email": "modules@sunnysideup.co.nz",
+      "role": "lead developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Sunnysideup\\PasswordSaver\\": "src/"
+    }
+  },
+  "suggested": {
+  }
+}
