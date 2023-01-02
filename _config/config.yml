@@ -1,3 +1,9 @@
 ---
 Name: password-saver
 ---
+---
+Name: externalurlfield
+---
+SilverStripe\Core\Injector\Injector:
+  PasswordField:
+    class: Sunnysideup\PasswordSaver\Model\Fields\DBPasswordField
