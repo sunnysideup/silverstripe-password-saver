@@ -14,7 +14,7 @@ class ClientSidePasswordField extends PasswordField
     /**
      * @var array
      */
-    protected $config;
+    protected $config = [];
 
     public function __construct($name, $title = null, $value = null)
     {
@@ -41,10 +41,12 @@ class ClientSidePasswordField extends PasswordField
 
             return $this;
         }
+
         if (is_array($this->config[$name])) {
             if (! is_array($val)) {
                 user_error("The value for {$name} must be an array");
             }
+
             $this->config[$name] = array_merge($this->config[$name], $val);
         } elseif (isset($this->config[$name])) {
             $this->config[$name] = $val;
