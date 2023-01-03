@@ -3,7 +3,6 @@
 namespace Sunnysideup\PasswordSaver\Model\Fields;
 
 use SilverStripe\ORM\FieldType\DBVarchar;
-
 use Sunnysideup\PasswordSaver\Form\ClientSidePasswordField;
 
 class DBPasswordField extends DBVarchar
@@ -14,13 +13,13 @@ class DBPasswordField extends DBVarchar
     // );
     //
 
-    public function __construct($name = null, $size = 2083, $options = array())
+    public function __construct($name = null, $size = 2083, $options = [])
     {
         parent::__construct($name, $size, $options);
     }
 
     /**
-     * Remove ugly parts of a url to make it nice
+     * Remove ugly parts of a url to make it nice.
      */
     public function Nice()
     {
@@ -28,7 +27,10 @@ class DBPasswordField extends DBVarchar
     }
 
     /**
-     * Scaffold the ExternalURLField for this ExternalURL
+     * Scaffold the ExternalURLField for this ExternalURL.
+     *
+     * @param null|mixed $title
+     * @param null|mixed $params
      */
     public function scaffoldFormField($title = null, $params = null)
     {
@@ -43,6 +45,7 @@ class DBPasswordField extends DBVarchar
         if ($this->value) {
             return $this->Nice();
         }
+
         return '(password not set)';
     }
 }
