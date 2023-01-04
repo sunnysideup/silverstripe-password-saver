@@ -2,5 +2,5 @@
 Name: password-saver
 ---
 SilverStripe\Core\Injector\Injector:
-  PasswordField:
-    class: Sunnysideup\PasswordSaver\Model\Fields\DBPasswordField
+  ClientSidePassword:
+    class: Sunnysideup\PasswordSaver\Model\Fields\DBClientSidePassword

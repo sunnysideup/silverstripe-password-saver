@@ -5,7 +5,7 @@ namespace Sunnysideup\PasswordSaver\Model\Fields;
 use SilverStripe\ORM\FieldType\DBVarchar;
 use Sunnysideup\PasswordSaver\Form\ClientSidePasswordField;
 
-class DBPasswordField extends DBVarchar
+class DBClientSidePassword extends DBVarchar
 {
     // private static $casting = array(
     //     "Domain" => ExternalURL::class,
