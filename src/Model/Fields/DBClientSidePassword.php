@@ -3,15 +3,17 @@
 namespace Sunnysideup\PasswordSaver\Model\Fields;
 
 use SilverStripe\ORM\FieldType\DBVarchar;
+use SilverStripe\ORM\DataObjectInterface;
+use SilverStripe\Core\ClassInfo;
 use Sunnysideup\PasswordSaver\Form\ClientSidePasswordField;
 
 class DBClientSidePassword extends DBVarchar
 {
-    // private static $casting = array(
-    //     "Domain" => ExternalURL::class,
-    //     "URL" => ExternalURL::class,
-    // );
-    //
+
+    public static function get_unique_value(DataObjectInterface $record) : string
+    {
+        return str_replace('-', '_', $record->getUniqueKey());
+    }
 
     public function __construct($name = null, $size = 2083, $options = [])
     {
@@ -35,7 +37,6 @@ class DBClientSidePassword extends DBVarchar
     public function scaffoldFormField($title = null, $params = null)
     {
         $field = new ClientSidePasswordField($this->name, $title);
-        $field->setMaxLength($this->getSize());
 
         return $field;
     }
@@ -48,4 +49,29 @@ class DBClientSidePassword extends DBVarchar
 
         return '(password not set)';
     }
+
+    public function setValue($value, $record = null, $markChanged = true)
+    {
+        if($record) {
+            $this->value = self::get_unique_value($record);
+        }
+        return $this;
+    }
+
+        /**
+         * Saves this field to the given data object.
+         *
+         * @param DataObject $dataObject
+         */
+        public function saveInto($dataObject)
+        {
+            $fieldName = $this->name;
+            if (empty($fieldName)) {
+                throw new \BadMethodCallException(
+                    "DBField::saveInto() Called on a nameless '" . static::class . "' object"
+                );
+            }
+            $dataObject->$fieldName = self::get_unique_value($dataObject);
+        }
+
 }

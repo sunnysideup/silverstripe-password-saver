@@ -1,7 +1,7 @@
 {
   "name": "sunnysideup/password-saver",
   "type": "silverstripe-vendormodule",
-  "description": "Silverstripe module that encrypts passwords server side.",
+  "description": "Silverstripe module that allows you to save passwords offline.",
   "keywords": [
     "Silverstripe-CMS",
     "CMS",
