@@ -2,14 +2,14 @@
 
 namespace Sunnysideup\PasswordSaver\Form;
 
-use SilverStripe\Forms\PasswordField;
+use SilverStripe\Forms\TextField;
 
 /**
  * ExternalURLField.
  *
  * Form field for entering, saving, validating external urls.
  */
-class ClientSidePasswordField extends PasswordField
+class ClientSidePasswordField extends TextField
 {
     /**
      * @var array
@@ -19,7 +19,7 @@ class ClientSidePasswordField extends PasswordField
     public function __construct($name, $title = null, $value = null)
     {
         $this->config = $this->config()->default_config;
-
+        $this->setAttribute('autocomplete', 'off');
         parent::__construct($name, $title, $value);
     }
 
