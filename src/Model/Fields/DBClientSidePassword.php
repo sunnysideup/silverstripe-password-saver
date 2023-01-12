@@ -4,6 +4,7 @@ namespace Sunnysideup\PasswordSaver\Model\Fields;
 
 use SilverStripe\ORM\FieldType\DBVarchar;
 use SilverStripe\ORM\DataObjectInterface;
+use SilverStripe\ORM\DataObject;
 use SilverStripe\Core\ClassInfo;
 use Sunnysideup\PasswordSaver\Form\ClientSidePasswordField;
 
