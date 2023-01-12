@@ -36,9 +36,7 @@ class DBClientSidePassword extends DBVarchar
      */
     public function scaffoldFormField($title = null, $params = null)
     {
-        $field = new ClientSidePasswordField($this->name, $title);
-
-        return $field;
+        return new ClientSidePasswordField($this->name, $title);
     }
 
     public function forTemplate()
@@ -55,6 +53,7 @@ class DBClientSidePassword extends DBVarchar
         if($record) {
             $this->value = self::get_unique_value($record);
         }
+
         return $this;
     }
 
@@ -71,6 +70,7 @@ class DBClientSidePassword extends DBVarchar
                     "DBField::saveInto() Called on a nameless '" . static::class . "' object"
                 );
             }
+
             $dataObject->$fieldName = self::get_unique_value($dataObject);
         }
 
