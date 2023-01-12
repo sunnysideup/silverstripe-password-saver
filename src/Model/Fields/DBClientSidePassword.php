@@ -2,23 +2,21 @@
 
 namespace Sunnysideup\PasswordSaver\Model\Fields;
 
-use SilverStripe\ORM\FieldType\DBVarchar;
-use SilverStripe\ORM\DataObjectInterface;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\Core\ClassInfo;
+use SilverStripe\ORM\DataObjectInterface;
+use SilverStripe\ORM\FieldType\DBVarchar;
 use Sunnysideup\PasswordSaver\Form\ClientSidePasswordField;
 
 class DBClientSidePassword extends DBVarchar
 {
-
-    public static function get_unique_value(DataObjectInterface $record) : string
-    {
-        return str_replace('-', '_', $record->getUniqueKey());
-    }
-
     public function __construct($name = null, $size = 2083, $options = [])
     {
         parent::__construct($name, $size, $options);
+    }
+
+    public static function get_unique_value(DataObjectInterface $record): string
+    {
+        return str_replace('-', '_', $record->getUniqueKey());
     }
 
     /**
@@ -51,28 +49,27 @@ class DBClientSidePassword extends DBVarchar
 
     public function setValue($value, $record = null, $markChanged = true)
     {
-        if($record) {
+        if ($record) {
             $this->value = self::get_unique_value($record);
         }
 
         return $this;
     }
 
-        /**
-         * Saves this field to the given data object.
-         *
-         * @param DataObject $dataObject
-         */
-        public function saveInto($dataObject)
-        {
-            $fieldName = $this->name;
-            if (empty($fieldName)) {
-                throw new \BadMethodCallException(
-                    "DBField::saveInto() Called on a nameless '" . static::class . "' object"
-                );
-            }
-
-            $dataObject->$fieldName = self::get_unique_value($dataObject);
+    /**
+     * Saves this field to the given data object.
+     *
+     * @param DataObject $dataObject
+     */
+    public function saveInto($dataObject)
+    {
+        $fieldName = $this->name;
+        if (empty($fieldName)) {
+            throw new \BadMethodCallException(
+                "DBField::saveInto() Called on a nameless '" . static::class . "' object"
+            );
         }
 
+        $dataObject->{$fieldName} = self::get_unique_value($dataObject);
+    }
 }

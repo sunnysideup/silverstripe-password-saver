@@ -1,11 +1,8 @@
 <?php
 
 namespace Sunnysideup\PasswordSaver\Form;
-use Sunnysideup\PasswordSaver\Model\Fields\DBClientSidePassword;
 
 use SilverStripe\Forms\ReadonlyField;
-use SilverStripe\Forms\TextField;
-use SilverStripe\ORM\DataObjectInterface;
 
 /**
  * ExternalURLField.
@@ -14,7 +11,6 @@ use SilverStripe\ORM\DataObjectInterface;
  */
 class ClientSidePasswordField extends ReadonlyField
 {
-
     public function Type()
     {
         return 'text password client-side-passsword';
@@ -32,7 +28,7 @@ class ClientSidePasswordField extends ReadonlyField
             array_filter(
                 [
                     parent::getDescription(),
-                    '<em>By separing username and password, you increase security.  Make sure to save the passwords somewhere securely, with the exact key listed here to ensure referential integrity.</em>'
+                    '<em>By separing username and password, you increase security.  Make sure to save the passwords somewhere securely, with the exact key listed here to ensure referential integrity.</em>',
                 ]
             )
         );
@@ -42,6 +38,4 @@ class ClientSidePasswordField extends ReadonlyField
     {
         return false;
     }
-
-
 }
