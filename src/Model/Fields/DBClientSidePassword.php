@@ -6,6 +6,7 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DataObjectInterface;
 use SilverStripe\ORM\FieldType\DBVarchar;
 use Sunnysideup\PasswordSaver\Form\ClientSidePasswordField;
+use Sunnysideup\UUDI\Api\HashCreator;
 
 class DBClientSidePassword extends DBVarchar
 {
@@ -16,7 +17,7 @@ class DBClientSidePassword extends DBVarchar
 
     public static function get_unique_value(DataObjectInterface $record): string
     {
-        return str_replace('-', '_', $record->getUniqueKey());
+        return HashCreator::generate_hash(32);
     }
 
     /**
@@ -24,7 +25,7 @@ class DBClientSidePassword extends DBVarchar
      */
     public function Nice()
     {
-        return '****';
+        return $this->value;
     }
 
     /**
