@@ -17,7 +17,7 @@ class DBClientSidePassword extends DBVarchar
 
     public static function get_unique_value(DataObjectInterface $record): string
     {
-        return HashCreator::generate_hash(32);
+        return HashCreator::generate_hash(5);
     }
 
     /**
