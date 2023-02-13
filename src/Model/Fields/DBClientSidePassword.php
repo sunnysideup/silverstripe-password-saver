@@ -10,7 +10,7 @@ use Sunnysideup\UUDI\Api\HashCreator;
 
 class DBClientSidePassword extends DBVarchar
 {
-    public function __construct($name = null, $size = 2083, $options = [])
+    public function __construct($name = null, $size = 5, $options = [])
     {
         parent::__construct($name, $size, $options);
     }
