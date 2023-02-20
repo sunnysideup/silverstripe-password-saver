@@ -10,14 +10,14 @@ use Sunnysideup\UUDI\Api\HashCreator;
 
 class DBClientSidePassword extends DBVarchar
 {
-    public function __construct($name = null, $size = 5, $options = [])
+    public function __construct($name = null, $size = 7, $options = [])
     {
         parent::__construct($name, $size, $options);
     }
 
     public static function get_unique_value(DataObjectInterface $record): string
     {
-        return HashCreator::generate_hash(5);
+        return HashCreator::generate_hash(7);
     }
 
     /**
@@ -45,16 +45,7 @@ class DBClientSidePassword extends DBVarchar
             return $this->Nice();
         }
 
-        return '(password not set)';
-    }
-
-    public function setValue($value, $record = null, $markChanged = true)
-    {
-        if ($record) {
-            $this->value = self::get_unique_value($record);
-        }
-
-        return $this;
+        return '(no code available)';
     }
 
     /**
@@ -70,7 +61,8 @@ class DBClientSidePassword extends DBVarchar
                 "DBField::saveInto() Called on a nameless '" . static::class . "' object"
             );
         }
-
-        $dataObject->{$fieldName} = self::get_unique_value($dataObject);
+        if (!$dataObject->{$fieldName}) {
+            $dataObject->{$fieldName} = self::get_unique_value($dataObject);
+        }
     }
 }
