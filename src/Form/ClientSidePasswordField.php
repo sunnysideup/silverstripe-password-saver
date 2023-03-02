@@ -19,7 +19,7 @@ class ClientSidePasswordField extends ReadonlyField
 
     public function Title()
     {
-        return 'Password Key (save password safely offline with only this key as reference)';
+        return 'Password Key (You can use this to reference the password stored in your password manager.)';
     }
 
     public function getDescription()
