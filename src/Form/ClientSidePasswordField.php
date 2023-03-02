@@ -19,7 +19,7 @@ class ClientSidePasswordField extends ReadonlyField
 
     public function Title()
     {
-        return 'Password Key (You can use this to reference the password stored in your password manager.)';
+        return 'Password Key (Please use the code shown to record (and link) your password in your favourite password manager.)';
     }
 
     public function getDescription()
