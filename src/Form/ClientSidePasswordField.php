@@ -5,11 +5,7 @@ namespace Sunnysideup\PasswordSaver\Form;
 use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 
-/**
- * ExternalURLField.
- *
- * Form field for entering, saving, validating external urls.
- */
+
 class ClientSidePasswordField extends ReadonlyField
 {
     public function Type()
