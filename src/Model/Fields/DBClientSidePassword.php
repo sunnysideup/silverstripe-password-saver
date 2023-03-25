@@ -61,7 +61,7 @@ class DBClientSidePassword extends DBVarchar
                 "DBField::saveInto() Called on a nameless '" . static::class . "' object"
             );
         }
-        if (!$dataObject->{$fieldName}) {
+        if (! $dataObject->{$fieldName}) {
             $dataObject->{$fieldName} = self::get_unique_value($dataObject);
         }
     }

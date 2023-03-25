@@ -5,7 +5,6 @@ namespace Sunnysideup\PasswordSaver\Form;
 use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 
-
 class ClientSidePasswordField extends ReadonlyField
 {
     public function Type()
@@ -30,6 +29,7 @@ class ClientSidePasswordField extends ReadonlyField
             )
         );
     }
+
     /**
      * @return mixed|string
      */
@@ -43,8 +43,10 @@ class ClientSidePasswordField extends ReadonlyField
 
         // "none" text
         $label = _t('SilverStripe\\Forms\\FormField.NONE', 'none');
+
         return "<pre>{$label}</pre>";
     }
+
     public function isReadonly()
     {
         return false;
