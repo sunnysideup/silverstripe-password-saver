@@ -14,7 +14,7 @@ class ClientSidePasswordField extends ReadonlyField
 
     public function Title()
     {
-        return 'Password Key (use shown code in Sesame.)';
+        return 'Password Key';
     }
 
     public function getDescription()
