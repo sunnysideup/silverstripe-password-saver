@@ -7,6 +7,28 @@ use SilverStripe\ORM\FieldType\DBHTMLText;
 
 class ClientSidePasswordField extends ReadonlyField
 {
+
+    protected $template = 'Sunnysideup/PasswordSaver/Form/ClientSidePasswordField';
+    protected $ManagerLink = null;
+
+    function __construct($name, $title = null, $value = null, string $link = null)
+    {
+        parent::__construct($name, $title, $value);
+        if ($link) {
+            $this->ManagerLink = $link;
+        }
+    }
+
+    public function ManagerLink()
+    {
+        return $this->ManagerLink;
+    }
+
+    public function setManagerLink(string $link)
+    {
+        $this->ManagerLink = $link;
+    }
+
     public function Type()
     {
         return 'text password client-side-passsword';
@@ -50,5 +72,10 @@ class ClientSidePasswordField extends ReadonlyField
     public function isReadonly()
     {
         return false;
+    }
+
+    public function getTemplate()
+    {
+        return $this->template;
     }
 }
