@@ -60,13 +60,13 @@ class ClientSidePasswordField extends ReadonlyField
         // Get raw value
         $value = $this->dataValue();
         if ($value) {
-            return DBHTMLText::create_field('HTMLText', "<pre>{$value}</pre>");
+            return DBHTMLText::create_field('HTMLText', "<pre style=\"margin-bottom:0;\">{$value}</pre>");
         }
 
         // "none" text
         $label = _t('SilverStripe\\Forms\\FormField.NONE', 'none');
 
-        return "<pre>{$label}</pre>";
+        return "<pre style=\"margin-bottom:0;\">{$label}</pre>";
     }
 
     public function isReadonly()
