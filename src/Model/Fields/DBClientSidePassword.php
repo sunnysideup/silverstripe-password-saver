@@ -86,7 +86,7 @@ class DBClientSidePassword extends DBVarchar
         return '
             <form method="post" action="'.$link.'" class="password-getter-setter-form" formtarget="_blank" rel="noreferrer noopener">
                 <input type="hidden" value="'.$this->value.'" name="Code" />
-                <button type="submit" value="'.$name.'" /></button>
+                <button type="submit" />'.$name.'</button>
             </form>
         ';
     }
