@@ -10,6 +10,11 @@ use Sunnysideup\UUDI\Api\HashCreator;
 
 class DBClientSidePassword extends DBVarchar
 {
+    private static $casting = [
+        'FormGet' => 'HTMLText',
+        'FormSet' => 'HTMLText',
+    ];
+
     public function __construct($name = null, $size = 7, $options = [])
     {
         parent::__construct($name, $size, $options);
@@ -64,5 +69,25 @@ class DBClientSidePassword extends DBVarchar
         if (! $dataObject->{$fieldName}) {
             $dataObject->{$fieldName} = self::get_unique_value($dataObject);
         }
+    }
+
+    public function FormGet(string $link, ?string $name = 'get'): string
+    {
+        return $this->formInner($link, $name);
+    }
+
+    public function FormSet(string $link, ?string $name = 'set'): string
+    {
+        return $this->formInner($link, $name);
+    }
+
+    protected function formInner(string $link, string $name): string
+    {
+        return '
+            <form method="post" action="'.$link.'" class="password-getter-setter-form" formtarget="_blank" rel="noreferrer noopener">
+                <input type="hidden" value="'.$this->value.'" name="Code" />
+                <button type="submit" value="'.$name.'" /></button>
+            </form>
+        ';
     }
 }
