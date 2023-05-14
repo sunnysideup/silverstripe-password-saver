@@ -84,9 +84,9 @@ class DBClientSidePassword extends DBVarchar
     protected function formInner(string $link, string $name): string
     {
         return '
-            <form method="post" action="'.$link.'" class="password-getter-setter-form" formtarget="_blank" target="_blank" rel="noreferrer noopener">
-                <input type="hidden" value="'.$this->value.'" name="Code" />
-                <button type="submit" />'.$name.'</button>
+            <form method="post" action="' . $link . '" class="password-getter-setter-form" formtarget="_blank" target="_blank" rel="noreferrer noopener">
+                <input type="hidden" value="' . $this->value . '" name="Code" />
+                <button type="submit" />' . $name . '</button>
             </form>
         ';
     }

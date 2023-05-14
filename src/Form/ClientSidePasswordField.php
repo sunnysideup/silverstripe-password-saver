@@ -7,11 +7,10 @@ use SilverStripe\ORM\FieldType\DBHTMLText;
 
 class ClientSidePasswordField extends ReadonlyField
 {
-
     protected $template = 'Sunnysideup/PasswordSaver/Form/ClientSidePasswordField';
-    protected $ManagerLink = null;
+    protected $ManagerLink;
 
-    function __construct($name, $title = null, $value = null, string $link = null)
+    public function __construct($name, $title = null, $value = null, string $link = null)
     {
         parent::__construct($name, $title, $value);
         if ($link) {
