@@ -77,9 +77,14 @@ class DBClientSidePassword extends DBVarchar
         if (! $dataObject->{$fieldName}) {
             $dataObject->{$fieldName} = self::get_unique_value($this->fieldLength);
         }
-        while(strlen($dataObject->{$fieldName}) < $this->fieldLength) {
-            $dataObject->{$fieldName} .= $dataObject->{$fieldName} . self::get_unique_value(1);
+        $length = strlen($dataObject->{$fieldName});
+        if($length < $this->fieldLength) {
+            $dataObject->{$fieldName} .= self::get_unique_value($this->fieldLength - $length);
         }
+        if($length > $this->fieldLength) {
+            $dataObject->{$fieldName} = substr($dataObject->{$fieldName}, 0, $this->fieldLength);
+        }
+
     }
 
     public function FormGet(string $link, ?string $name = 'get'): string
