@@ -10,6 +10,8 @@ use Sunnysideup\UUDI\Api\HashCreator;
 
 class DBClientSidePassword extends DBVarchar
 {
+    protected $fieldLength = 7;
+
     private static $casting = [
         'FormGet' => 'HTMLText',
         'FormSet' => 'HTMLText',
@@ -17,12 +19,18 @@ class DBClientSidePassword extends DBVarchar
 
     public function __construct($name = null, $size = 7, $options = [])
     {
+        if((int) $size) {
+            $this->fieldLength = (int) $size;
+        }
         parent::__construct($name, $size, $options);
     }
 
-    public static function get_unique_value(DataObjectInterface $record): string
+    public static function get_unique_value(?int $size = 7): string
     {
-        return HashCreator::generate_hash(7);
+        if(! $size) {
+            $size = 7;
+        }
+        return HashCreator::generate_hash($size);
     }
 
     /**
@@ -67,7 +75,10 @@ class DBClientSidePassword extends DBVarchar
             );
         }
         if (! $dataObject->{$fieldName}) {
-            $dataObject->{$fieldName} = self::get_unique_value($dataObject);
+            $dataObject->{$fieldName} = self::get_unique_value($this->fieldLength);
+        }
+        while(strlen($dataObject->{$fieldName}) < $this->fieldLength) {
+            $dataObject->{$fieldName} .= $dataObject->{$fieldName} . self::get_unique_value(1);
         }
     }
 
