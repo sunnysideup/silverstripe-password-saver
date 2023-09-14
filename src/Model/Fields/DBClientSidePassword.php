@@ -3,7 +3,6 @@
 namespace Sunnysideup\PasswordSaver\Model\Fields;
 
 use SilverStripe\ORM\DataObject;
-use SilverStripe\ORM\DataObjectInterface;
 use SilverStripe\ORM\FieldType\DBVarchar;
 use Sunnysideup\PasswordSaver\Form\ClientSidePasswordField;
 use Sunnysideup\UUDI\Api\HashCreator;
@@ -19,7 +18,7 @@ class DBClientSidePassword extends DBVarchar
 
     public function __construct($name = null, $size = 7, $options = [])
     {
-        if((int) $size) {
+        if ((int) $size) {
             $this->fieldLength = (int) $size;
         }
         parent::__construct($name, $size, $options);
@@ -27,9 +26,10 @@ class DBClientSidePassword extends DBVarchar
 
     public static function get_unique_value(?int $size = 7): string
     {
-        if(! $size) {
+        if (! $size) {
             $size = 7;
         }
+
         return HashCreator::generate_hash($size);
     }
 
@@ -78,13 +78,12 @@ class DBClientSidePassword extends DBVarchar
             $dataObject->{$fieldName} = self::get_unique_value($this->fieldLength);
         }
         $length = strlen($dataObject->{$fieldName});
-        if($length < $this->fieldLength) {
+        if ($length < $this->fieldLength) {
             $dataObject->{$fieldName} .= self::get_unique_value($this->fieldLength - $length);
         }
-        if($length > $this->fieldLength) {
+        if ($length > $this->fieldLength) {
             $dataObject->{$fieldName} = substr($dataObject->{$fieldName}, 0, $this->fieldLength);
         }
-
     }
 
     public function FormGet(string $link, ?string $name = 'get'): string
