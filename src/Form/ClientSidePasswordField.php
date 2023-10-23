@@ -58,10 +58,15 @@ class ClientSidePasswordField extends ReadonlyField
     {
         // Get raw value
         $value = $this->dataValue();
+        $fontSize = '2em';
         if (!$value) {
-            $value = 'not set yet - please save this record first';
+            $value = 'Code not set yet - please save this record first';
+            $fontSize = '1em';
         }
-        return DBHTMLText::create_field('HTMLText', "<pre style=\"margin-bottom:0; font-size: 20px;\">{$value}</pre>");
+        return DBHTMLText::create_field(
+            'HTMLText',
+            '<pre style="margin-bottom:0; font-size: ' . $fontSize . ';">' . $value . '</pre>'
+        );
 
     }
 
