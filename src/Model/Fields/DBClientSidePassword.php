@@ -2,6 +2,7 @@
 
 namespace Sunnysideup\PasswordSaver\Model\Fields;
 
+use BadMethodCallException;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\FieldType\DBVarchar;
 use Sunnysideup\PasswordSaver\Form\ClientSidePasswordField;
@@ -21,6 +22,7 @@ class DBClientSidePassword extends DBVarchar
         if ((int) $size) {
             $this->fieldLength = (int) $size;
         }
+
         parent::__construct($name, $size, $options);
     }
 
@@ -49,7 +51,7 @@ class DBClientSidePassword extends DBVarchar
      */
     public function scaffoldFormField($title = null, $params = null)
     {
-        return new ClientSidePasswordField($this->name, $title);
+        return ClientSidePasswordField::create($this->name, $title);
     }
 
     public function forTemplate()
@@ -70,17 +72,20 @@ class DBClientSidePassword extends DBVarchar
     {
         $fieldName = $this->name;
         if (empty($fieldName)) {
-            throw new \BadMethodCallException(
+            throw new BadMethodCallException(
                 "DBField::saveInto() Called on a nameless '" . static::class . "' object"
             );
         }
+
         if (! $dataObject->{$fieldName}) {
             $dataObject->{$fieldName} = self::get_unique_value($this->fieldLength);
         }
+
         $length = strlen($dataObject->{$fieldName});
         if ($length < $this->fieldLength) {
             $dataObject->{$fieldName} .= self::get_unique_value($this->fieldLength - $length);
         }
+
         if ($length > $this->fieldLength) {
             $dataObject->{$fieldName} = substr($dataObject->{$fieldName}, 0, $this->fieldLength);
         }
