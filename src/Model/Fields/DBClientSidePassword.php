@@ -3,10 +3,11 @@
 namespace Sunnysideup\PasswordSaver\Model\Fields;
 
 use BadMethodCallException;
-use SilverStripe\ORM\DataObject;
+use SilverStripe\Forms\FormField;
+use SilverStripe\Model\ModelData;
 use SilverStripe\ORM\FieldType\DBVarchar;
 use Sunnysideup\PasswordSaver\Form\ClientSidePasswordField;
-use Sunnysideup\UUDI\Api\HashCreator;
+use Sunnysideup\UUID\Api\HashCreator;
 
 class DBClientSidePassword extends DBVarchar
 {
@@ -17,7 +18,7 @@ class DBClientSidePassword extends DBVarchar
         'FormSet' => 'HTMLText',
     ];
 
-    public function __construct($name = null, $size = 7, $options = [])
+    public function __construct(?string $name = null, int $size = 7, array $options = [])
     {
         if ((int) $size) {
             $this->fieldLength = (int) $size;
@@ -49,7 +50,7 @@ class DBClientSidePassword extends DBVarchar
      * @param null|mixed $title
      * @param null|mixed $params
      */
-    public function scaffoldFormField($title = null, $params = null)
+    public function scaffoldFormField(?string $title = null, array $params = []): ?FormField
     {
         return ClientSidePasswordField::create($this->name, $title);
     }
@@ -66,9 +67,9 @@ class DBClientSidePassword extends DBVarchar
     /**
      * Saves this field to the given data object.
      *
-     * @param DataObject $dataObject
+     * @param ModelData $dataObject
      */
-    public function saveInto($dataObject): void
+    public function saveInto(ModelData $dataObject): void
     {
         $fieldName = $this->name;
         if (empty($fieldName)) {
@@ -104,8 +105,8 @@ class DBClientSidePassword extends DBVarchar
     protected function formInner(string $link, string $name): string
     {
         return '
-            <form method="post" action="' . $link . '" class="password-getter-setter-form" formtarget="_blank" target="_blank" rel="noreferrer noopener">
-                <input type="hidden" value="' . $this->value . '" name="Code" />
+            <form method="post" action="' . htmlspecialchars($link, ENT_QUOTES) . '" class="password-getter-setter-form" formtarget="_blank" target="_blank" rel="noreferrer noopener">
+                <input type="hidden" value="' . htmlspecialchars((string) $this->value, ENT_QUOTES) . '" name="Code" />
                 <button type="submit" />' . $name . '</button>
             </form>
         ';

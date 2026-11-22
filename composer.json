@@ -16,7 +16,8 @@
         "field"
     ],
     "require": {
-        "silverstripe/framework": "^6.0"
+        "silverstripe/framework": "^6.0",
+        "sunnysideup/uuid": "dev-master"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
