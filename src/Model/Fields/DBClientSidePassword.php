@@ -54,7 +54,7 @@ class DBClientSidePassword extends DBVarchar
         return ClientSidePasswordField::create($this->name, $title);
     }
 
-    public function forTemplate()
+    public function forTemplate(): string
     {
         if ($this->value) {
             return $this->Nice();
@@ -68,7 +68,7 @@ class DBClientSidePassword extends DBVarchar
      *
      * @param DataObject $dataObject
      */
-    public function saveInto($dataObject)
+    public function saveInto($dataObject): void
     {
         $fieldName = $this->name;
         if (empty($fieldName)) {

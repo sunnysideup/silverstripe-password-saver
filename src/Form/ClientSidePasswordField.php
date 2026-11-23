@@ -54,10 +54,8 @@ class ClientSidePasswordField extends ReadonlyField
 
     /**
      * @return mixed|string
-     * @deprecated FormField::Value() has been deprecated. It will be replaced by getFormattedValue() and getValue().
-     * See: https://docs.silverstripe.org/en/5/changelogs/5.4.0/#deprecated-api
      */
-    public function Value()
+    public function getFormattedValue()
     {
         // Get raw value
         $value = $this->dataValue();
