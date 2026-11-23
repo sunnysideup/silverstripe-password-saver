@@ -3,6 +3,7 @@
 namespace Sunnysideup\PasswordSaver\Model\Fields;
 
 use BadMethodCallException;
+use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\FieldType\DBVarchar;
 use Sunnysideup\PasswordSaver\Form\ClientSidePasswordField;
@@ -103,9 +104,12 @@ class DBClientSidePassword extends DBVarchar
 
     protected function formInner(string $link, string $name): string
     {
+        $link = Convert::raw2att($link);
+        $value = Convert::raw2att((string) $this->value);
+
         return '
             <form method="post" action="' . $link . '" class="password-getter-setter-form" formtarget="_blank" target="_blank" rel="noreferrer noopener">
-                <input type="hidden" value="' . $this->value . '" name="Code" />
+                <input type="hidden" value="' . $value . '" name="Code" />
                 <button type="submit" />' . $name . '</button>
             </form>
         ';
