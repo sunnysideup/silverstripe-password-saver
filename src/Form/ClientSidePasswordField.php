@@ -8,6 +8,7 @@ use SilverStripe\ORM\FieldType\DBHTMLText;
 class ClientSidePasswordField extends ReadonlyField
 {
     protected $template = 'Sunnysideup/PasswordSaver/Form/ClientSidePasswordField';
+
     protected $ManagerLink;
 
     public function __construct($name, $title = null, $value = null, string $link = null)
@@ -54,7 +55,7 @@ class ClientSidePasswordField extends ReadonlyField
     /**
      * @return mixed|string
      */
-    public function Value()
+    public function getFormattedValue()
     {
         // Get raw value
         $value = $this->dataValue();
@@ -63,6 +64,7 @@ class ClientSidePasswordField extends ReadonlyField
             $value = 'Code not set yet - please save this record first';
             $fontSize = '1em';
         }
+
         return DBHTMLText::create_field(
             'HTMLText',
             '<pre style="margin-bottom:0; font-size: ' . $fontSize . ';">' . $value . '</pre>'
