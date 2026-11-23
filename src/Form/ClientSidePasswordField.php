@@ -2,6 +2,7 @@
 
 namespace Sunnysideup\PasswordSaver\Form;
 
+use SilverStripe\Core\Convert;
 use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 
@@ -21,7 +22,7 @@ class ClientSidePasswordField extends ReadonlyField
 
     public function ManagerLink()
     {
-        return $this->ManagerLink;
+        return Convert::raw2att($this->ManagerLink);
     }
 
     public function setManagerLink(string $link)
@@ -66,6 +67,8 @@ class ClientSidePasswordField extends ReadonlyField
             $value = 'Code not set yet - please save this record first';
             $fontSize = '1em';
         }
+
+        $value = Convert::raw2att($value);
 
         return DBHTMLText::create_field(
             'HTMLText',
