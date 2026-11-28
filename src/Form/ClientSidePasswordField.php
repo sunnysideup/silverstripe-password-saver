@@ -12,7 +12,7 @@ class ClientSidePasswordField extends ReadonlyField
 
     protected $ManagerLink;
 
-    public function __construct($name, $title = null, $value = null, string $link = null)
+    public function __construct($name, $title = null, $value = null, ?string $link = null)
     {
         parent::__construct($name, $title, $value);
         if ($link) {
